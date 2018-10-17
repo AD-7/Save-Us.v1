@@ -1,0 +1,8 @@
+Aleksander - postac gracza, ruch postaci, funkcja ataku, poczatkowe wspólrzedne (0,0,0)		
+
+Szymon - tlo gry, budowa planszy na pierwszym poziomie. (kazdy z etapów bedzie mial kilka 	poziomów)
+Filip - mechanika pierwszego przeciwnika
+
+Kamil - mechanika drugiego przeciwnika (innego) Oba potworki czy inne ofiary maja pasowac mniej wiecej do etapu 1 kiedy poruszamy sie czlowieczkiem, czyli tak przyziemnie :D.
+
+Termin czwartek 22:00	
