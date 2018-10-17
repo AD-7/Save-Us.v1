@@ -47,22 +47,4 @@ public class Orc : MonoBehaviour {
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         _isFacingRight = transform.localScale.x > 0;
     }
-
-    
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Boundary")
-        { return; }
-
-     
-
-        if (collision.tag == "Player")
-        {
-           // Destroy(collision.gameObject);
-        Destroy(gameObject);
-        }
-        
-        
-    }
 }
