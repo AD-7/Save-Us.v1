@@ -20,7 +20,7 @@ public class Demo : MonoBehaviour {
 	public Transform groundCheck;
 	float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
-
+    public GameObject gun;
 	//variable for how high player jumps//
 	[SerializeField]
 	private float jumpForce = 300f;
@@ -31,6 +31,7 @@ public class Demo : MonoBehaviour {
 	bool attack = false;
 
 	void Start () {
+        gun.SetActive(false);
 		GetComponent<Rigidbody2D> ().freezeRotation = true;
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponentInChildren<Animator> ();
@@ -72,13 +73,15 @@ public class Demo : MonoBehaviour {
 			attack = true;
 			anim.SetBool ("Attack", true);
 			anim.SetFloat ("Speed", 0);
-
+            gun.SetActive(true);
+            
 		}
 		if (Input.GetKeyUp(KeyCode.LeftAlt))
 			{
 			attack = false;
 			anim.SetBool ("Attack", false);
-			}
+            gun.SetActive(false);
+        }
 
 		if (grounded && Input.GetKeyDown(KeyCode.Space) && !dead)
 		{
