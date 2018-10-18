@@ -20,9 +20,15 @@ public class Demo : MonoBehaviour {
 	public Transform groundCheck;
 	float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
-    public GameObject gun;
-	//variable for how high player jumps//
-	[SerializeField]
+
+    public GameObject gun1;
+    public float fireRateGun1 ;
+    public GameObject pocisk;
+    private float nextFire ;
+
+
+    //variable for how high player jumps//
+    [SerializeField]
 	private float jumpForce = 300f;
 
 	public Rigidbody2D rb { get; set; }
@@ -31,7 +37,7 @@ public class Demo : MonoBehaviour {
 	bool attack = false;
 
 	void Start () {
-        gun.SetActive(false);
+        gun1.SetActive(false);
 		GetComponent<Rigidbody2D> ().freezeRotation = true;
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponentInChildren<Animator> ();
@@ -68,19 +74,23 @@ public class Demo : MonoBehaviour {
 	//attacking and jumping//
 	private void HandleInput()
 	{
-		if (Input.GetKeyDown (KeyCode.LeftAlt) && !dead) 
+		if (Input.GetKeyDown (KeyCode.LeftAlt) && !dead && Time.time > nextFire) 
 		{
+             
 			attack = true;
 			anim.SetBool ("Attack", true);
 			anim.SetFloat ("Speed", 0);
-            gun.SetActive(true);
-            
-		}
+            gun1.SetActive(true);
+
+            nextFire = Time.time + fireRateGun1;
+            Instantiate(pocisk, gun1.GetComponent<Transform>().position, gun1.GetComponent<Transform>().rotation);
+
+        }
 		if (Input.GetKeyUp(KeyCode.LeftAlt))
 			{
 			attack = false;
 			anim.SetBool ("Attack", false);
-            gun.SetActive(false);
+            gun1.SetActive(false);
         }
 
 		if (grounded && Input.GetKeyDown(KeyCode.Space) && !dead)
