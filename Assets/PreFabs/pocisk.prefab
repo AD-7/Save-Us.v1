@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50533788913083918}
   - component: {fileID: 60311867943158442}
   - component: {fileID: 114532151191101176}
+  - component: {fileID: 114310400550625702}
   m_Layer: 0
   m_Name: pocisk
   m_TagString: Bolt
@@ -91,6 +92,18 @@ PolygonCollider2D:
       - {x: -0.125, y: -0.049999997}
       - {x: 0.125, y: -0.049999997}
       - {x: 0.125, y: 0.049999997}
+--- !u!114 &114310400550625702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1378584552134010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4315516012be1449834733e7ad4adfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 3
 --- !u!114 &114532151191101176
 MonoBehaviour:
   m_ObjectHideFlags: 1
