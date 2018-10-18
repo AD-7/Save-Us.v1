@@ -21,8 +21,10 @@ public class Demo : MonoBehaviour {
 	float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
 
+    private GameObject ActualGun;
     public GameObject gun1;
     public float fireRateGun1 ;
+    public float fireRateGun2;
     public GameObject pocisk;
     private float nextFire ;
 
@@ -41,7 +43,7 @@ public class Demo : MonoBehaviour {
 		GetComponent<Rigidbody2D> ().freezeRotation = true;
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponentInChildren<Animator> ();
-
+        ActualGun = gun1;
 	}
 
 	void Update()
@@ -83,7 +85,7 @@ public class Demo : MonoBehaviour {
             gun1.SetActive(true);
 
             nextFire = Time.time + fireRateGun1;
-            Instantiate(pocisk, gun1.GetComponent<Transform>().position, gun1.GetComponent<Transform>().rotation);
+            Instantiate(pocisk, ActualGun.GetComponent<Transform>().position, ActualGun.GetComponent<Transform>().rotation);
 
         }
 		if (Input.GetKeyUp(KeyCode.LeftAlt))
