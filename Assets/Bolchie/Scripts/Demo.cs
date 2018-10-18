@@ -23,6 +23,7 @@ public class Demo : MonoBehaviour {
 
     private GameObject ActualGun;
     public GameObject gun1;
+    public GameObject gun2;
     public float fireRateGun1 ;
     public float fireRateGun2;
     public GameObject pocisk;
@@ -40,10 +41,14 @@ public class Demo : MonoBehaviour {
 
 	void Start () {
         gun1.SetActive(false);
-		GetComponent<Rigidbody2D> ().freezeRotation = true;
+        gun2.SetActive(false);
+      ActualGun = gun1;
+        ActualGun.SetActive(false);
+       
+        GetComponent<Rigidbody2D> ().freezeRotation = true;
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponentInChildren<Animator> ();
-        ActualGun = gun1;
+  
 	}
 
 	void Update()
@@ -82,7 +87,7 @@ public class Demo : MonoBehaviour {
 			attack = true;
 			anim.SetBool ("Attack", true);
 			anim.SetFloat ("Speed", 0);
-            gun1.SetActive(true);
+            ActualGun.SetActive(true);
 
             nextFire = Time.time + fireRateGun1;
             Instantiate(pocisk, ActualGun.GetComponent<Transform>().position, ActualGun.GetComponent<Transform>().rotation);
@@ -92,7 +97,7 @@ public class Demo : MonoBehaviour {
 			{
 			attack = false;
 			anim.SetBool ("Attack", false);
-            gun1.SetActive(false);
+            ActualGun.SetActive(false);
         }
 
 		if (grounded && Input.GetKeyDown(KeyCode.Space) && !dead)
@@ -122,4 +127,17 @@ public class Demo : MonoBehaviour {
 			theScale.x *= -1;
 			transform.localScale = theScale;
 	}
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "GunItem")
+        {
+            ActualGun = gun2;
+            Destroy(collision.gameObject);
+            fireRateGun1 = fireRateGun2;
+        }
+    }
+
+
 }
