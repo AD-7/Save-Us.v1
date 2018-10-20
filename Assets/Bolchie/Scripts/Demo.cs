@@ -137,6 +137,11 @@ public class Demo : MonoBehaviour {
             Destroy(collision.gameObject);
             fireRateGun1 = fireRateGun2;
         }
+
+        if(collision.tag == "Enemy")
+        {
+            Destroy(gameObject);
+        }
     }
 
 

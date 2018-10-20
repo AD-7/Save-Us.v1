@@ -27,9 +27,9 @@ public class Orc : MonoBehaviour
         anim = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
-
+   
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (_moveRight)
         {
@@ -68,14 +68,22 @@ public class Orc : MonoBehaviour
 
         if (target.position.x < transform.position.x && _isFacingRight)
         {
+            this.GetComponent<BoxCollider2D>().edgeRadius += 1;
+            anim.SetTrigger(attack);
+          
             Flip();
             _moveRight = false;
+           
         }
 
         if (target.position.x > transform.position.x && !_isFacingRight)
         {
+            this.GetComponent<BoxCollider2D>().edgeRadius += 1;
+            anim.SetTrigger(attack);
             Flip();
             _moveRight = true;
+
+          
         }
     }
 
@@ -90,7 +98,7 @@ public class Orc : MonoBehaviour
         }
         if (collision.tag == "Player")
         {
-            anim.SetTrigger(attack);
+       
         }
 
 
