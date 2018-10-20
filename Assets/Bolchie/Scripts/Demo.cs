@@ -178,7 +178,7 @@ public class Demo : MonoBehaviour
 
     void SetCountText()
     {
-        countText.text = "Count: " + points.ToString();
+        countText.text = "Count: " + points.ToString() + "/5";
         timeText.text = "Time left : " + timeLeft.ToString();
 
         if (points >= 1)
