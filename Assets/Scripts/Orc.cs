@@ -51,7 +51,7 @@ public class Orc : MonoBehaviour
         if (enemyRigidBody2D.position.x <= _startPos)
             _moveRight = true;
 
-        if (Mathf.Abs(target.position.x - transform.position.x) < _rangeToAttack &&
+        if (Mathf.Abs(target.position.x - transform.position.x) < _rangeToAttack && 3*Mathf.Abs(target.position.y - transform.position.y) < _rangeToAttack &&
             (_endPos > target.position.x && target.position.x > (_startPos)))
         {
             AttackPlayer();
@@ -68,14 +68,24 @@ public class Orc : MonoBehaviour
 
         if (target.position.x < transform.position.x && _isFacingRight)
         {
+
+            anim.SetTrigger(attack);
             Flip();
             _moveRight = false;
+            if (Mathf.Abs(target.position.x - transform.position.x) < _rangeToAttack && 3*Mathf.Abs(target.position.y - transform.position.y) < _rangeToAttack &&
+           (_endPos > target.position.x && target.position.x > (_startPos)))
+                Destroy(target.gameObject, 1);
         }
 
         if (target.position.x > transform.position.x && !_isFacingRight)
         {
+
+            anim.SetTrigger(attack);
             Flip();
             _moveRight = true;
+            if (Mathf.Abs(target.position.x - transform.position.x) < _rangeToAttack && 3*Mathf.Abs(target.position.y - transform.position.y) < _rangeToAttack &&
+           (_endPos > target.position.x && target.position.x > (_startPos)))
+                Destroy(target.gameObject, 1);
         }
     }
 
@@ -88,13 +98,13 @@ public class Orc : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
-        if (collision.tag == "Player")
+
+        if (Mathf.Abs(target.position.x - transform.position.x) < _rangeToAttack &&
+            (_endPos > target.position.x && target.position.x > (_startPos)) && collision.tag == "Player")
         {
-            anim.SetTrigger(attack);
+            AttackPlayer();
+            
         }
-
-
-
     }
 
 

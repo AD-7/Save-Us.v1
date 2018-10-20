@@ -164,7 +164,7 @@ Prefab:
     - target: {fileID: 114393563242933454, guid: d58e58070863f4a4e9a88c181489ff86,
         type: 2}
       propertyPath: jumpForce
-      value: 460
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 58962551605444100, guid: d58e58070863f4a4e9a88c181489ff86,
         type: 2}
@@ -384,9 +384,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitsToMove: 8
-  EnemySpeed: 300
-  _isFacingRight: 1
-  _rangeToAttack: 7
+  EnemySpeed: 400
+  _isFacingRight: 0
+  _rangeToAttack: 10
   _moveRight: 1
 --- !u!61 &231691861
 BoxCollider2D:
@@ -412,7 +412,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 6.17, y: 2.57}
-  m_EdgeRadius: 1.33
+  m_EdgeRadius: 0.25
 --- !u!50 &231691862
 Rigidbody2D:
   serializedVersion: 4
