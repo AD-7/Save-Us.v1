@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Basic Player Script//
 //controls: 
@@ -9,133 +10,164 @@ using UnityEngine;
 //Space to jump
 //Z is to see dead animation
 
-public class Demo : MonoBehaviour {
+public class Demo : MonoBehaviour
+{
 
-	//variable for how fast player runs//
-	private float speed = 10f;
+    private float speed = 10f;
 
-	private bool facingRight = true;
-	private Animator anim;
-	bool grounded = false;
-	public Transform groundCheck;
-	float groundRadius = 0.2f;
-	public LayerMask whatIsGround;
+    private bool facingRight = true;
+    private Animator anim;
+    bool grounded = false;
+    public Transform groundCheck;
+    float groundRadius = 0.2f;
+    public LayerMask whatIsGround;
 
     private GameObject ActualGun;
     public GameObject gun1;
     public GameObject gun2;
-    public float fireRateGun1 ;
+    public float fireRateGun1;
     public float fireRateGun2;
     public GameObject pocisk;
-    private float nextFire ;
+    private float nextFire;
 
+
+    private int points;
+    public Text countText;
+    public Text winText;
 
     //variable for how high player jumps//
     [SerializeField]
-	private float jumpForce = 300f;
+    private float jumpForce = 300f;
 
-	public Rigidbody2D rb { get; set; }
+    public Rigidbody2D rb { get; set; }
 
-	bool dead = false;
-	bool attack = false;
+    bool dead = false;
+    bool attack = false;
 
-	void Start () {
+    void Start()
+    {
         gun1.SetActive(false);
         gun2.SetActive(false);
-      ActualGun = gun1;
+        ActualGun = gun1;
         ActualGun.SetActive(false);
-       
-        GetComponent<Rigidbody2D> ().freezeRotation = true;
-		rb = GetComponent<Rigidbody2D> ();
-		anim = GetComponentInChildren<Animator> ();
-  
-	}
 
-	void Update()
-	{
-		HandleInput ();
-	}
+        GetComponent<Rigidbody2D>().freezeRotation = true;
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
 
-	//movement//
-	void FixedUpdate ()
-	{
-		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
-		anim.SetBool ("Ground", grounded);
+        this.points = 0;
+        SetCountText();
+        this.winText.text = "";
 
-		float horizontal = Input.GetAxis("Horizontal");
-		if (!dead && !attack)
-		{
-			anim.SetFloat ("vSpeed", rb.velocity.y);
-			anim.SetFloat ("Speed", Mathf.Abs (horizontal));
-			rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
-		}
-		if (horizontal > 0 && !facingRight && !dead && !attack) {
-			Flip (horizontal);
-		}
+}
 
-		else if (horizontal < 0 && facingRight && !dead && !attack){
-			Flip (horizontal);
-		}
-	}
+    void Update()
+    {
+        HandleInput();
+    }
 
-	//attacking and jumping//
-	private void HandleInput()
-	{
-		if (Input.GetKeyDown (KeyCode.LeftAlt) && !dead && Time.time > nextFire) 
-		{
-             
-			attack = true;
-			anim.SetBool ("Attack", true);
-			anim.SetFloat ("Speed", 0);
+    //movement//
+    void FixedUpdate()
+    {
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+        anim.SetBool("Ground", grounded);
+
+        float horizontal = Input.GetAxis("Horizontal");
+        if (!dead && !attack)
+        {
+            anim.SetFloat("vSpeed", rb.velocity.y);
+            anim.SetFloat("Speed", Mathf.Abs(horizontal));
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        }
+        if (horizontal > 0 && !facingRight && !dead && !attack)
+        {
+            Flip(horizontal);
+        }
+
+        else if (horizontal < 0 && facingRight && !dead && !attack)
+        {
+            Flip(horizontal);
+        }
+    }
+
+    //attacking and jumping//
+    private void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftAlt) && !dead && Time.time > nextFire)
+        {
+
+            attack = true;
+            anim.SetBool("Attack", true);
+            anim.SetFloat("Speed", 0);
             ActualGun.SetActive(true);
 
             nextFire = Time.time + fireRateGun1;
             Instantiate(pocisk, ActualGun.GetComponent<Transform>().position, ActualGun.GetComponent<Transform>().rotation);
 
         }
-		if (Input.GetKeyUp(KeyCode.LeftAlt))
-			{
-			attack = false;
-			anim.SetBool ("Attack", false);
+        if (Input.GetKeyUp(KeyCode.LeftAlt))
+        {
+            attack = false;
+            anim.SetBool("Attack", false);
             ActualGun.SetActive(false);
         }
 
-		if (grounded && Input.GetKeyDown(KeyCode.Space) && !dead)
-		{
-			anim.SetBool ("Ground", false);
-			rb.AddForce (new Vector2 (0,jumpForce));
-		}
+        if (grounded && Input.GetKeyDown(KeyCode.Space) && !dead)
+        {
+            anim.SetBool("Ground", false);
+            rb.AddForce(new Vector2(0, jumpForce));
+        }
 
-		//dead animation for testing//
-		if (Input.GetKeyDown (KeyCode.Z)) 
-		{
-			if (!dead) {
-				anim.SetBool ("Dead", true);
-				anim.SetFloat ("Speed", 0);
-				dead = true;
-			} else {
-					anim.SetBool ("Dead", false);
-					dead = false;
-				}
-		}
-	}
-		
-	private void Flip (float horizontal)
-	{
-			facingRight = !facingRight;
-			Vector3 theScale = transform.localScale;
-			theScale.x *= -1;
-			transform.localScale = theScale;
-	}
+        //dead animation for testing//
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (!dead)
+            {
+                anim.SetBool("Dead", true);
+                anim.SetFloat("Speed", 0);
+                dead = true;
+            }
+            else
+            {
+                anim.SetBool("Dead", false);
+                dead = false;
+            }
+        }
+    }
+
+    private void Flip(float horizontal)
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "GunItem")
+        if (collision.tag == "GunItem")
         {
             ActualGun = gun2;
             Destroy(collision.gameObject);
             fireRateGun1 = fireRateGun2;
+        }
+
+        if (collision.tag == "PickUp")
+        {
+            Destroy(collision.gameObject);
+            points++;
+            SetCountText();
+        }
+    }
+
+
+    void SetCountText()
+    {
+        countText.text = "Count: " + points.ToString();
+        if (points >= 1)
+        {
+            winText.text = "You Win!";
         }
     }
 

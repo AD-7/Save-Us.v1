@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bolt
   - GunItem
+  - PickUp
   layers:
   - Default
   - TransparentFX
