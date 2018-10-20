@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -278,9 +278,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb5159d59901024ab1bec229ed57a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitsToMove: 2
+  UnitsToMove: 8
   EnemySpeed: 300
-  _isFacingRight: 0
+  _isFacingRight: 1
+  _rangeToAttack: 7
   _moveRight: 1
 --- !u!61 &231691861
 BoxCollider2D:
@@ -294,7 +295,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.18132949, y: -0.00023216009}
+  m_Offset: {x: 0.42, y: 1.29}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -305,8 +306,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.3208847, y: 3.041161}
-  m_EdgeRadius: 0
+  m_Size: {x: 6.17, y: 2.57}
+  m_EdgeRadius: 1.33
 --- !u!50 &231691862
 Rigidbody2D:
   serializedVersion: 4
@@ -321,7 +322,7 @@ Rigidbody2D:
   m_Mass: 5
   m_LinearDrag: 1
   m_AngularDrag: 0
-  m_GravityScale: 0
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -458,15 +459,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 4bd025fbe3c94be43946d59e7ae40d3c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -7.79
+      value: -12.02
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4bd025fbe3c94be43946d59e7ae40d3c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.7
+      value: -5.12
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4bd025fbe3c94be43946d59e7ae40d3c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.45
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4bd025fbe3c94be43946d59e7ae40d3c, type: 2}
       propertyPath: m_LocalRotation.x
