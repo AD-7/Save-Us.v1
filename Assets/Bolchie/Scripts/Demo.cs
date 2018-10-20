@@ -35,6 +35,9 @@ public class Demo : MonoBehaviour
     public Text countText;
     public Text winText;
 
+    public float timeLeft;
+    public Text timeText;
+
     //variable for how high player jumps//
     [SerializeField]
     private float jumpForce = 300f;
@@ -57,13 +60,24 @@ public class Demo : MonoBehaviour
 
         this.points = 0;
         SetCountText();
-        this.winText.text = "";
+        winText.text = "";
+        timeText.text = "";
 
-}
+        timeLeft = 120;
+
+    }
 
     void Update()
     {
         HandleInput();
+
+        timeLeft -= Time.deltaTime;
+        if (timeLeft <= 0)
+        {
+            //GameOver();
+        }
+        SetCountText();
+
     }
 
     //movement//
@@ -165,9 +179,18 @@ public class Demo : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Count: " + points.ToString();
+        timeText.text = "Time left : " + timeLeft.ToString();
+
         if (points >= 1)
         {
             winText.text = "You Win!";
+        }
+
+        if (timeLeft <= 0)
+        {
+            //GameOver();
+            winText.text = "You Loose :( ";
+
         }
     }
 
