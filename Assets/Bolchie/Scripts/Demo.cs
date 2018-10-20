@@ -22,12 +22,14 @@ public class Demo : MonoBehaviour
     float groundRadius = 0.2f;
     public LayerMask whatIsGround;
 
+
+    public bool _isFacingRight;
     private GameObject ActualGun;
     public GameObject gun1;
     public GameObject gun2;
     public float fireRateGun1;
     public float fireRateGun2;
-    public GameObject pocisk;
+    public GameObject pocisk,pocisk2;
     private float nextFire;
 
 
@@ -53,7 +55,7 @@ public class Demo : MonoBehaviour
         gun2.SetActive(false);
         ActualGun = gun1;
         ActualGun.SetActive(false);
-
+        _isFacingRight = transform.localScale.x > 0;
         GetComponent<Rigidbody2D>().freezeRotation = true;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -92,6 +94,7 @@ public class Demo : MonoBehaviour
             anim.SetFloat("vSpeed", rb.velocity.y);
             anim.SetFloat("Speed", Mathf.Abs(horizontal));
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+            _isFacingRight = transform.localScale.x > 0;
         }
         if (horizontal > 0 && !facingRight && !dead && !attack)
         {
@@ -116,8 +119,13 @@ public class Demo : MonoBehaviour
             ActualGun.SetActive(true);
 
             nextFire = Time.time + fireRateGun1;
+            if (_isFacingRight) 
             Instantiate(pocisk, ActualGun.GetComponent<Transform>().position, ActualGun.GetComponent<Transform>().rotation);
-
+            if (!_isFacingRight)
+            {
+            Instantiate(pocisk2, ActualGun.GetComponent<Transform>().position, ActualGun.GetComponent<Transform>().rotation);
+            }
+            
         }
         if (Input.GetKeyUp(KeyCode.LeftAlt))
         {
