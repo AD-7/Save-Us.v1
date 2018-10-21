@@ -48,6 +48,7 @@ public class Demo : MonoBehaviour
 
     bool dead = false;
     bool attack = false;
+    public bool restart = false;
 
     void Start()
     {
@@ -59,26 +60,31 @@ public class Demo : MonoBehaviour
         GetComponent<Rigidbody2D>().freezeRotation = true;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
-
+        restart = false;
         this.points = 0;
         SetCountText();
         winText.text = "";
         timeText.text = "";
 
-        timeLeft = 120;
+        timeLeft = 20;
 
     }
 
     void Update()
     {
         HandleInput();
-
-        timeLeft -= Time.deltaTime;
+        if (timeLeft > 0)
+        {
+            timeLeft -= Time.deltaTime;
+        }
+        
         if (timeLeft <= 0)
         {
-            //GameOver();
+           GameOver();
         }
         SetCountText();
+
+
 
     }
 
@@ -193,14 +199,18 @@ public class Demo : MonoBehaviour
         {
             winText.text = "You Win!";
         }
-
-        if (timeLeft <= 0)
-        {
-            //GameOver();
-            winText.text = "You Loose :( ";
-
-        }
+        
     }
+
+
+    public void GameOver()
+    {
+        
+        winText.text = "GAME OVER :( \n Try again by clicking R";
+  
+        restart = true;
+    }
+
 
 
 }
