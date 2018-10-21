@@ -140,7 +140,7 @@ public class Demo : MonoBehaviour
             ActualGun.SetActive(false);
         }
 
-        if(Input.GetKeyDown(KeyCode.RightShift) && !dead)
+        if(Input.GetKeyDown(KeyCode.RightShift) && !dead && ActualGun.GetComponent<Transform>().position.y <=11)
         {
             Instantiate(platforma, ActualGun.GetComponent<Transform>().position, ActualGun.GetComponent<Transform>().rotation);
         }
