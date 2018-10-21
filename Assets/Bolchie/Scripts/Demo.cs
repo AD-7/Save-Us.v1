@@ -31,7 +31,7 @@ public class Demo : MonoBehaviour
     public float fireRateGun2;
     public GameObject pocisk,pocisk2;
     private float nextFire;
-
+    public GameObject platforma;
 
     private int points;
     public Text countText;
@@ -66,7 +66,7 @@ public class Demo : MonoBehaviour
         winText.text = "";
         timeText.text = "";
 
-        timeLeft = 20;
+        timeLeft = 120;
 
     }
 
@@ -139,6 +139,17 @@ public class Demo : MonoBehaviour
             anim.SetBool("Attack", false);
             ActualGun.SetActive(false);
         }
+
+        if(Input.GetKeyDown(KeyCode.RightShift) && !dead)
+        {
+            Instantiate(platforma, ActualGun.GetComponent<Transform>().position, ActualGun.GetComponent<Transform>().rotation);
+        }
+
+
+
+
+
+
 
         if (grounded && Input.GetKeyDown(KeyCode.Space) && !dead)
         {
