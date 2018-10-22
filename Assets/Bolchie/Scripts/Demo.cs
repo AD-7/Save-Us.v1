@@ -206,9 +206,9 @@ public class Demo : MonoBehaviour
         countText.text = "Count: " + points.ToString() + "/5";
         timeText.text = "Time left : " + timeLeft.ToString();
 
-        if (points >= 1)
+        if (points >= 5)
         {
-            winText.text = "You Win!";
+            winText.text = "Level Completed!";
         }
         
     }
