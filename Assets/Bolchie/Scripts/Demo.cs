@@ -22,7 +22,6 @@ public class Demo : MonoBehaviour
     float groundRadius = 0.2f;
     public LayerMask whatIsGround;
 
-
     public bool _isFacingRight;
     private GameObject ActualGun;
     public GameObject gun1;
@@ -87,6 +86,8 @@ public class Demo : MonoBehaviour
 
 
     }
+
+
 
     //movement//
     void FixedUpdate()
@@ -203,10 +204,10 @@ public class Demo : MonoBehaviour
 
     void SetCountText()
     {
-        countText.text = "Count: " + points.ToString() + "/5";
+        countText.text = "Vehicle Parts: " + points.ToString() + "/4";
         timeText.text = "Time left : " + timeLeft.ToString();
 
-        if (points >= 5)
+        if (points >= 4)
         {
             winText.text = "Level Completed!";
         }
